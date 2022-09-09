@@ -1,0 +1,117 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 13,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "ignorePatterns": ["/build/*.js"],
+    "rules": {
+        "no-const-assign": "error",
+
+        "no-duplicate-imports": ["error", { "includeExports": true }],
+
+        "camelcase": "error",
+
+        "curly": "error",
+
+        "no-var": "error",
+
+        "prefer-const": "error",
+
+        "array-bracket-newline": ["error", { "multiline": true }],
+
+        "arrow-parens": ["error", "always"],
+
+        "arrow-spacing": "error",
+
+        "block-spacing": "error",
+
+        "brace-style": "error",
+
+        "comma-dangle": ["error", "never"],
+
+        "comma-spacing": ["error", { "before": false, "after": true }],
+
+        "dot-location": ["error", "object"],
+
+        "func-call-spacing": ["error", "never"],
+
+        "indent": ["error", 2],
+
+        "jsx-quotes": ["error", "prefer-double"],
+
+        "key-spacing": ["error", { "beforeColon": false , "afterColon": true }],
+
+        "keyword-spacing": ["error", { "before": true }],
+
+        "no-multi-spaces": "error",
+
+        "no-trailing-spaces": "error",
+
+        "object-curly-spacing": ["error", "always"],
+
+        "quotes": ["error", "single"],
+
+        "semi": ["error", "always"],
+
+        "semi-spacing": ["error", { "before": false, "after": true }],
+
+        "semi-style": ["error", "last"],
+
+        "space-before-blocks": "error",
+
+        "react/display-name": 0,
+
+        "@typescript-eslint/no-unused-vars": "warn",
+
+        "@typescript-eslint/no-var-requires": 0,
+
+        "@typescript-eslint/type-annotation-spacing": ["error", {
+            "before": false,
+            "after": true,
+            "overrides": { "arrow": { "before": true, "after": true }}
+        }],
+
+        "@typescript-eslint/member-delimiter-style": ["error", {
+            "multiline": {
+                "delimiter": "semi",
+                "requireLast": true
+            },
+            "singleline": {
+                "delimiter": "semi",
+                "requireLast": false
+            }
+        }],
+
+        "@typescript-eslint/member-ordering": ["error", { 
+            "default": [
+                "private-field",
+                "protected-field",
+                "public-field",
+                "constructor",
+                "private-method",
+                "protected-method",
+                "public-method",
+                "method",
+                "signature"
+            ] 
+        }],
+
+        "@typescript-eslint/no-inferrable-types": "off"
+    }
+}
