@@ -10,6 +10,8 @@
     "@types/node": "^16.11.56",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
+    "@waves/provider-keeper": "^0.4.1",
+    "@waves/signer": "^1.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
