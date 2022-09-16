@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Signer } from '@waves/signer';
 import { ProviderKeeper } from '@waves/provider-keeper';
+import { getTxInfo, getTxStatus } from './api';
 
 function App() {
   const [userAssets, setUserAssets] = useState<string>('');
@@ -12,7 +13,7 @@ function App() {
   const keeper = new ProviderKeeper();
   signer.setProvider(keeper);
 
-  const handleClick = async () => {
+  const handleConnect = async () => {
     try {
       await signer.login();
       const balance = await signer.getBalance();
@@ -22,10 +23,51 @@ function App() {
     }
   };
 
+  const getConfirmedTransaction = async (txId: string) => {
+    try {
+      await new Promise<void>((resolve) => {
+        const apiCallsInterval = setInterval(async () => {
+          const txStatus = await getTxStatus(txId);
+          if (txStatus.status === 'confirmed') {
+            resolve();
+            clearInterval(apiCallsInterval);
+          }
+        }, 1000);
+      });
+      const transaction = await getTxInfo(txId);
+      return transaction;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleInvoke = async () => {
+    try {
+      const [tx] = await signer.invoke({
+        dApp: '3N4boZRUJ2LxY5jLyp6hmxGktqnawQidu6H',
+        payment: [
+          {
+            assetId: 'WAVES',
+            amount: 10000000
+          }
+        ],
+        call: {
+          function: 'startGame',
+          args: []
+        }
+      }).broadcast();
+      const transaction = await getConfirmedTransaction(tx.id);
+      console.log('success', transaction);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
 
   return (
     <div className="App">
-      <button onClick={handleClick}>Connect wallet</button>
+      <button onClick={handleConnect}>Connect wallet</button>
+      <button onClick={handleInvoke}>Invoke contract</button>
       <pre>
         {userAssets}
       </pre>
